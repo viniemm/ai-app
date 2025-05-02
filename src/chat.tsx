@@ -21,23 +21,28 @@ const Chat = () => {
   };
 
   return (
-    <div>
-      <div>
-        {messages.map((message, index) => (
-          <div key={index} className={message.sender}>
-            {message.text}
-          </div>
-        ))}
+    <div className="fixed bottom-0 w-full bg-gray-800 text-white p-4">
+      <div className="max-w-4xl mx-auto">
+        <div className="mb-4">
+          {messages.map((message, index) => (
+            <div key={index} className={`p-2 ${message.sender === 'user' ? 'text-right' : 'text-left'}`}>
+              {message.text}
+            </div>
+          ))}
+        </div>
+        <form onSubmit={handleSubmit} className="flex">
+          <input
+            type="text"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder="Type your message..."
+            className="flex-grow p-2 rounded-l-lg bg-gray-700 text-white"
+          />
+          <button type="submit" className="p-2 rounded-r-lg bg-blue-600 hover:bg-blue-700">
+            Send
+          </button>
+        </form>
       </div>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          placeholder="Type your message..."
-        />
-        <button type="submit">Send</button>
-      </form>
     </div>
   );
 };
